@@ -34,14 +34,11 @@ const parseDateInput = (input) => {
  * @returns {string} - Formatted date or '-'
  */
 export const formatDateLong = (date, locale = 'en') => {
-  const normalizedLocale =
-    typeof locale === 'string' ? locale.replace('_', '-') : 'en'
-
   try {
     const d = parseDateInput(date)
     if (!d) return INVALID_DATE_FALLBACK
 
-    return new Intl.DateTimeFormat(normalizedLocale, {
+    return new Intl.DateTimeFormat(locale, {
       day: 'numeric',
       month: 'long',
       year: 'numeric',

@@ -281,7 +281,6 @@ import BackButton from '@/features/ux_creation/components/BackButton.vue'
 import {
   getMethodManagerView,
   instantiateStudyByType,
-  normalizeStudyType,
   STUDY_TYPES,
 } from '@/shared/constants/methodDefinitions'
 import StudyAdmin from '@/shared/models/StudyAdmin'
@@ -377,12 +376,10 @@ const submitFromTemplate = async () => {
 
   isLoading.value = true
   const user = store.getters.user
-  const normalizedTestType = normalizeStudyType(templateBody.testType)
 
   const rawData = {
     ...templateBody,
     id: null,
-    testType: normalizedTestType,
     testTitle: test.value.title || templateBody.testTitle || '',
     testDescription:
       test.value.description || templateBody.testDescription || '',
@@ -396,13 +393,13 @@ const submitFromTemplate = async () => {
     updateDate: Date.now(),
   }
 
-  const study = instantiateStudyByType(normalizedTestType, rawData)
+  const study = instantiateStudyByType(rawData.testType, rawData)
   const testId = await store.dispatch('createStudy', study)
   isLoading.value = false
 
   store.commit('RESET_STUDY_DETAILS')
 
-  const methodView = getMethodManagerView(normalizedTestType, rawData.subType)
+  const methodView = getMethodManagerView(rawData.testType, rawData.subType)
   if (testId) {
     router.push({ name: methodView, params: { id: testId } })
   }

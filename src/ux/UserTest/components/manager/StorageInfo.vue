@@ -138,7 +138,6 @@ import { computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { formatBytes } from '@/shared/utils/formatUtils'
 import { useI18n } from 'vue-i18n'
-import { useStore } from 'vuex'
 
 const props = defineProps({
   test: {
@@ -148,14 +147,15 @@ const props = defineProps({
 })
 
 const router = useRouter()
-const store = useStore()
 const { t } = useI18n()
 
 // Storage quota (in bytes) - you can make this configurable
 const STORAGE_QUOTA = 5 * 1024 * 1024 * 1024 // 5GB default
 
-// Read answers from the centralized Answer Vuex store getter
-const answers = computed(() => store.getters.allAnswersList)
+const answers = computed(() => {
+  const testAnswers = props.test?.answers || []
+  return Array.isArray(testAnswers) ? testAnswers : Object.values(testAnswers)
+})
 
 const totalMediaFiles = computed(() => {
   let count = 0

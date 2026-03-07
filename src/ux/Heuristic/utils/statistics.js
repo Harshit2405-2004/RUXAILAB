@@ -130,19 +130,11 @@ function statistics() {
       evaluator.heuristicQuestions.forEach((heuristic) => {
         let noAplication = 0
         let noReply = 0
-        let qNotApplicable = 0
         let res = heuristic.heuristicQuestions.reduce(
           (totalQuestions, question) => {
             if (question.heuristicAnswer.value === null) {
               noAplication++
             }
-            if (
-              question.heuristicAnswer.value === 0 ||
-              question.heuristicAnswer.value === '0'
-            ) {
-              qNotApplicable++
-            }
-
             if (
               question.heuristicAnswer.value === '' ||
               Object.values(question.heuristicAnswer).length < 3

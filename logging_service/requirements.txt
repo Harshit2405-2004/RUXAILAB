@@ -1,0 +1,11 @@
+fastapi
+uvicorn[standard]
+pydantic
+google-cloud-firestore
+firebase-admin
+python-dotenv
+httpx
+pytest
+pytest-asyncio
+pytest-cov
+google-auth

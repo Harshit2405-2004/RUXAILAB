@@ -5,7 +5,6 @@ import { formatTimeSpentFromMs } from '@/ux/Heuristic/utils/statistics'
 import { STUDY_TYPES } from '@/shared/constants/methodDefinitions'
 import UserStudyEvaluatorAnswer from '@/ux/UserTest/models/UserStudyEvaluatorAnswer'
 import TaskAnswer from '@/ux/UserTest/models/TaskAnswer'
-import { showError } from '@/shared/utils/toast'
 
 const answerController = new AnswerController()
 
@@ -159,16 +158,6 @@ export default {
 
       return {}
     },
-    allAnswersList(state) {
-      const doc = state.testAnswerDocument
-      if (!doc?.taskAnswers) return []
-      return Object.values(doc.taskAnswers).filter(
-        (answer) =>
-          typeof answer === 'object' &&
-          answer !== null &&
-          answer.hidden !== true,
-      )
-    },
   },
   mutations: {
     SET_ANSWER_DOCUMENT(state, payload) {
@@ -252,9 +241,8 @@ export default {
         const answerDoc =
           await answerController.getAnswerById(currentAnswersDocId)
         commit('SET_ANSWER_DOCUMENT', answerDoc)
-      } catch (error) {
-        console.error('[Answer Store] Failed to fetch answer document:', error)
-        showError('errors.failedToLoadAnswers')
+      } catch {
+        // commit("setError", true);
       } finally {
         commit('setLoading', false)
       }
@@ -263,9 +251,8 @@ export default {
       commit('setLoading', true)
       try {
         await answerController.updateUserAnswer(payload)
-      } catch (error) {
-        console.error('[Answer Store] Failed to update user answer:', error)
-        showError('errors.failedToUpdateAnswer')
+      } catch {
+        // commit("setError", true);
       } finally {
         commit('setLoading', false)
       }
@@ -278,8 +265,7 @@ export default {
           testDocId: payload.test.id,
         })
       } catch (e) {
-        console.error('[Answer Store] Failed to remove cooperator:', e)
-        showError('errors.failedToRemoveCooperator')
+        // commit("setError", true);
       } finally {
         commit('setLoading', false)
       }
@@ -318,7 +304,8 @@ export default {
           })
         }
       } catch (e) {
-        console.error('[Answer Store] Failed to save test answer:', e)
+        console.error('Error in save test answer', e)
+        // commit("setError", true);
         if (payload.errorMessage) {
           commit('SET_TOAST', {
             type: 'error',
@@ -334,9 +321,7 @@ export default {
       commit('setLoading', true)
       try {
         await answerController.updateTaskAnswer(payload, answersDocId)
-      } catch (error) {
-        console.error('[Answer Store] Failed to update task answer:', error)
-        showError('errors.failedToUpdateAnswer')
+      } catch {
       } finally {
         commit('setLoading', false)
       }

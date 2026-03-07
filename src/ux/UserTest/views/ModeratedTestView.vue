@@ -786,10 +786,6 @@ watch(
 // Methods
 const proceedToNextStep = async () => {
   if (!isUserTestAdmin.value) return
-
-  // Increment globalIndex before updating Firebase
-  globalIndex.value = globalIndex.value + 1
-
   const roomRef = dbRef(database, `rooms/${roomId.value}`)
   await update(roomRef, {
     globalIndex: globalIndex.value,
@@ -963,9 +959,6 @@ const startTest = async () => {
       if (data.showVideoCall !== undefined) {
         displayVideoCallComponent.value = data.showVideoCall
       }
-    } else {
-      // Admin always stays in video call during session
-      displayVideoCallComponent.value = true
     }
   })
 

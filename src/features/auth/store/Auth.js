@@ -63,21 +63,11 @@ export default {
      */
     async signup({ commit }, payload) {
       try {
-        const normalizedEmail = payload.email?.trim().toLowerCase()
         const { user } = await authController.signUp(
-          normalizedEmail,
+          payload.email,
           payload.password,
         )
-        await userController.create({
-          id: user.uid,
-          email: user.email || normalizedEmail,
-        })
-
-        // Send verification email
-        try {
-          await authController.sendVerificationEmail(user.email, user.email)
-        } catch {}
-
+        await userController.create({ id: user.uid, email: user.email })
         commit('SET_TOAST', {
           message: i18n.global.t('auth.signupSuccess'),
           type: 'success',
@@ -97,21 +87,11 @@ export default {
       commit('setLoading', true)
 
       try {
-        const normalizedEmail = payload.email?.trim().toLowerCase()
         const { user } = await authController.signIn(
-          normalizedEmail,
+          payload.email,
           payload.password,
           payload.rememberMe,
         )
-
-        // Check if email is verified
-        if (!user.emailVerified) {
-          commit('SET_TOAST', {
-            message: i18n.global.t('auth.emailNotVerified'),
-            type: 'warning',
-          })
-          throw new Error('EMAIL_NOT_VERIFIED')
-        }
 
         const dbUser = await userController.getById(user.uid)
 
@@ -122,9 +102,6 @@ export default {
           type: 'success',
         })
       } catch (err) {
-        if (err.message === 'EMAIL_NOT_VERIFIED') {
-          throw err
-        }
         showError('errors.incorrectCredential')
         return err
       } finally {
@@ -170,9 +147,6 @@ export default {
           type: 'success',
         })
       } catch (err) {
-        if (err.message === 'EMAIL_NOT_VERIFIED') {
-          throw err
-        }
         commit('SET_TOAST', {
           message: i18n.global.t('errors.globalError'),
           type: 'error',
@@ -209,13 +183,6 @@ export default {
       try {
         const user = await authController.autoSignIn()
         if (!user) return
-
-        // Check if email is verified
-        if (!user.emailVerified) {
-          // User is logged in but email not verified
-          // Don't set them as fully authenticated, but allow access to verify-email page
-          return user
-        }
 
         const dbUser = await userController.getById(user.uid)
         commit('SET_USER', dbUser)
@@ -261,22 +228,6 @@ export default {
         throw err
       } finally {
         commit('setLoading', false)
-      }
-    },
-
-    async sendVerificationEmail({ commit }, { email, userName }) {
-      try {
-        await authController.sendVerificationEmail(email, userName)
-        commit('SET_TOAST', {
-          message: i18n.global.t('auth.verificationEmailSent'),
-          type: 'success',
-        })
-      } catch (err) {
-        commit('SET_TOAST', {
-          message: i18n.global.t('auth.errorSendingVerification'),
-          type: 'error',
-        })
-        throw err
       }
     },
   },

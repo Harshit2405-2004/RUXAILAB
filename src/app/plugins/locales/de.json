@@ -43,34 +43,7 @@
       "fair": "Mittel",
       "good": "Gut",
       "strong": "Stark"
-    },
-    "emailNotVerified": "E-Mail nicht verifiziert",
-    "verificationEmailSent": "Bestätigungs-E-Mail erfolgreich versendet!",
-    "errorSendingVerification": "Fehler beim Versenden der Bestätigungs-E-Mail",
-    "verifyEmailTitle": "Verifizieren Sie Ihre E-Mail",
-    "verifyEmailSubtitle": "Wir haben einen Bestätigungslink an Ihre E-Mail gesendet",
-    "emailLabel": "E-Mail",
-    "verifyingEmail": "Verifizierung...",
-    "emailAlreadyVerified": "E-Mail bereits verifiziert?",
-    "emailVerified": "E-Mail erfolgreich verifiziert!",
-    "checkEmailTitle": "Überprüfen Sie Ihre E-Mail",
-    "checkEmailStep1": "Überprüfen Sie Ihren Posteingang auf eine Bestätigungs-E-Mail",
-    "checkEmailStep2": "Klicken Sie auf den Link in der E-Mail, um Ihr Konto zu verifizieren",
-    "checkEmailStep3": "Kehren Sie hier zurück und Ihr Konto wird verifiziert",
-    "checkSpamFolder": "Nicht gesehen? Überprüfen Sie Ihren Spam-Ordner",
-    "resending": "Wird erneut gesendet...",
-    "resendEmail": "E-Mail erneut senden",
-    "changeEmail": "E-Mail ändern",
-    "continueToDashboard": "Weiter zum Dashboard",
-    "signOut": "Abmelden",
-    "newEmail": "Neue E-Mail",
-    "enterNewEmail": "Geben Sie Ihre neue E-Mail-Adresse ein",
-    "saving": "Wird gespeichert...",
-    "errorCheckingVerification": "Fehler beim Überprüfen des Verifizierungsstatus",
-    "errorResendingEmail": "Fehler beim erneuten Versenden der Bestätigungs-E-Mail",
-    "invalidEmail": "Ungültige E-Mail-Adresse",
-    "emailUpdatedVerification": "E-Mail aktualisiert! Wir haben einen Bestätigungslink an Ihre neue E-Mail gesendet.",
-    "errorUpdatingEmail": "Fehler beim Aktualisieren der E-Mail"
+    }
   },
   "common": {
     "enterTextHere": "Text hier eingeben...",
@@ -139,7 +112,6 @@
     "user": "Benutzer",
     "id": "ID",
     "itemsPerPage": "Elemente pro Seite:",
-    "saving": "Wird gespeichert...",
     "visible": "Sichtbar"
   },
   "storage": {
@@ -412,10 +384,7 @@
     "globalError": "Ein Fehler ist aufgetreten, entschuldigen Sie die Unannehmlichkeiten.",
     "cameraPermissionDenied": "Der Zugriff auf die Kamera ist erforderlich, um fortzufahren. Bitte erlauben Sie den Kamerazugriff in den Browser-Einstellungen.",
     "sendError": "Einladung konnte nicht gesendet werden. Bitte versuchen Sie es erneut",
-    "missingVariableTitles": "Kann nicht speichern: Einige Variablen fehlen Titel",
-    "failedToLoadAnswers": "Fehler beim Laden der Antworten",
-    "failedToUpdateAnswer": "Fehler beim Aktualisieren der Antwort",
-    "failedToSaveAnswerCooperator": "Fehler beim Speichern der Cooperator-Antwort"
+    "missingVariableTitles": "Kann nicht speichern: Einige Variablen fehlen Titel"
   },
   "Introduction": {
     "title": "UX Remote LAB",

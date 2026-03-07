@@ -55,12 +55,7 @@
             @click:append-inner="showConfirmPassword = !showConfirmPassword"
           />
 
-          <v-btn
-            type="submit"
-            color="primary"
-            block
-            min-height="44"
-          >
+          <v-btn type="submit" color="primary" block min-height="44">
             {{ $t('auth.SIGNIN.sign-up') }}
           </v-btn>
         </v-form>
@@ -148,7 +143,7 @@ const onSignUp = async () => {
         email: email.value,
         password: password.value,
       })
-      await router.push('/verify-email')
+      await router.push('/admin')
     } catch (error) {
       return error
     } finally {

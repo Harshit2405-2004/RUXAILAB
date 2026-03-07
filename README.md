@@ -1,7 +1,10 @@
 <div align="center">
   <h1>Welcome to UX Remote LAB</h1>
-  <p><strong>UX Remote LAB</strong> is a user-friendly platform for usability testing and heuristic evaluation. Designed and provided by UX Remote LAB, it is a web application developed to assist project creators in gathering valuable insights from their users.</p>
-</div>
+  <p>
+    <a href="https://codecov.io/gh/ruxailab/RUXAILAB">
+      <img src="https://codecov.io/gh/ruxailab/RUXAILAB/branch/develop/graph/badge.svg" alt="codecov" />
+    </a>
+  </p>
 
 <hr />
 <div align="center">
@@ -40,11 +43,7 @@ UX Remote LAB provides a collaborative environment for creators to share their p
 - [Request a Feature 🚀](https://github.com/uramakilab/remote-usability-lab/issues/new)
 - [Ask a Question 🤗](https://github.com/uramakilab/remote-usability-lab/discussions)
 
-For commercial support, academic collaborations, and answers to common questions, please contact us by one of our communications channels:
-
-- [Discord Server](https://discord.gg/YnkDk9BNYK)
-- [Discussions](https://github.com/ruxailab/RUXAILAB/discussions)
-- Email: `ruxailab@gmail.com`
+For commercial support, academic collaborations, and answers to common questions, please use [Get Support]() to contact us.
 
 ### Development Environment
 
@@ -209,4 +208,4 @@ Visit `http://localhost:5000` in your browser to access the UX Remote LAB platfo
 
 ## License
 
-MIT © [RUXAILAB](https://github.com/ruxailab/RUXAILAB)
+MIT © [RUXAILAB](https://github.com/uramakilab/remote-usability-lab)

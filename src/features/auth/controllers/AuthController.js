@@ -150,20 +150,4 @@ export default class AuthController {
       throw err
     }
   }
-
-  async sendVerificationEmail(email, userName) {
-    try {
-      const emailController = new EmailController()
-      await emailController.send({
-        to: email,
-        subject: 'Verify Your Email Address',
-        template: 'emailVerification',
-        data: {
-          userName: userName || email,
-        },
-      })
-    } catch (err) {
-      throw err
-    }
-  }
 }

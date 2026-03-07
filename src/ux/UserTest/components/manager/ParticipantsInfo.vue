@@ -107,7 +107,6 @@
 import { computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
-import { useStore } from 'vuex'
 
 const props = defineProps({
   test: {
@@ -117,15 +116,17 @@ const props = defineProps({
 })
 
 const router = useRouter()
-const store = useStore()
 const { t } = useI18n()
-
-// Read answers from the centralized Answer Vuex store getter
-const allAnswers = computed(() => store.getters.allAnswersList)
 
 // Get completed participants from answers
 const completedAnswers = computed(() => {
-  return allAnswers.value.filter((answer) => answer.submitted)
+  const testAnswers = props.test?.answers || []
+  if (Array.isArray(testAnswers)) {
+    return testAnswers.filter((answer) => answer.submitted)
+  } else if (typeof testAnswers === 'object' && testAnswers !== null) {
+    return Object.values(testAnswers).filter((answer) => answer.submitted)
+  }
+  return []
 })
 
 // Get cooperators
@@ -145,18 +146,18 @@ const pendingInvitations = computed(() => {
 })
 
 const totalParticipants = computed(() => {
-  // Use the larger of: accepted cooperators or total answers
-  // This ensures admin test-taking is counted even without being a cooperator
-  return Math.max(acceptedCooperators.value.length, allAnswers.value.length)
+  // Total = accepted cooperators (who can participate)
+  return acceptedCooperators.value.length
 })
 
 const completedParticipants = computed(() => {
+  // Count completed answers
   return completedAnswers.value.length
 })
 
 const notStartedParticipants = computed(() => {
-  // Participants who haven't completed: total minus completed, floored at 0
-  return Math.max(0, totalParticipants.value - completedAnswers.value.length)
+  // Accepted cooperators who haven't completed yet
+  return acceptedCooperators.value.length - completedAnswers.value.length
 })
 
 const completionPercentage = computed(() => {
